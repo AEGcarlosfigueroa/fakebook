@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import MainSeparator from "../components/MainSeparator";
+import Story from "../components/Story";
 import ToolBar from "../components/ToolBar";
 import Users from "../components/Users";
 
@@ -16,6 +17,9 @@ const Home = () => {
             <ToolBar />
             <MainSeparator />
             <Users />
+            <MainSeparator/>
+            <Story/>
+            <MainSeparator/>
         </View>
     )
 }

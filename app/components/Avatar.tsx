@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import styled from "styled-components/native";
 
 const styles = StyleSheet.create({
     container: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     profileImage: {
         width: 40,
         height: 40,
-        borderRadius: 20
+        borderRadius: 20,
     },
     userActive: {
         position: 'absolute',
@@ -26,11 +27,19 @@ const styles = StyleSheet.create({
     }
 });
 
-const Avatar =({source, online}) => {
+const ProfileImage = styled.Image`
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border-color: ${(props => props.checked ? '#FFFFFF' : '#1777f2')};
+    border-width: ${(props => props.story ? 3 : 0)};
+`
+
+const Avatar =({source, online, story, checked}) => {
     return (
         <>
         <View style={styles.container}>
-            <Image style={styles.profileImage} source={source}></Image>
+            <ProfileImage source={source} checked={checked} story={story}/>
             {online && <View style={styles.userActive}/>}
         </View>
         </>
