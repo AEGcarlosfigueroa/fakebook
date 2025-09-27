@@ -3,6 +3,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 import 'react-native-gesture-handler';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from './components/Header';
 import Friends from "./screens/Friends";
 import Groups from "./screens/Groups";
@@ -21,6 +23,7 @@ const styles = StyleSheet.create({
 export default function Index() {
   return (
     <>
+    <GestureHandlerRootView>
     <StatusBar
     backgroundColor="#FFFFFF"
     animated={true}
@@ -29,6 +32,10 @@ export default function Index() {
     showHideTransition={"none"}
     />
     <View style={styles.topOffset}/>
+    <SafeAreaProvider>
+    <SafeAreaView>
+    <ScrollView>
+      <View style={{height: 5500}}>
       <Header />
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -54,7 +61,12 @@ export default function Index() {
           <Tab.Screen name="Profile" component={Profile}/>
           <Tab.Screen name="Notifications" component={Notifications}/> 
           <Tab.Screen name="Menu" component={Menu}/>
-        </Tab.Navigator> 
+        </Tab.Navigator>
+        </View>
+        </ScrollView>
+        </SafeAreaView>
+        </SafeAreaProvider>
+        </GestureHandlerRootView> 
     </>
   );
 }

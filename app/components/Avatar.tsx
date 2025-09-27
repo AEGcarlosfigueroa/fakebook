@@ -32,7 +32,7 @@ const ProfileImage = styled.Image`
     height: 40px;
     border-radius: 20px;
     border-color: ${(props => props.checked ? '#FFFFFF' : '#1777f2')};
-    border-width: ${(props => props.story ? 3 : 0)};
+    border-width: ${(props => props.story ? '3px' : 0)};
 `
 
 const Avatar =({source, online, story, checked}) => {

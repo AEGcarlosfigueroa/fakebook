@@ -8,7 +8,7 @@ import Avatar from "./Avatar";
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 200,
+        height: 215,
         flexDirection: 'row',
         alignItems: 'center'
     },
