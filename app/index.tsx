@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import 'react-native-gesture-handler';
 import Header from './components/Header';
 import Friends from "./screens/Friends";
@@ -28,15 +28,15 @@ export default function Index() {
     barStyle={"dark-content"}
     showHideTransition={"none"}
     />
-    <ScrollView style={styles.topOffset}>
+    <View style={styles.topOffset}/>
       <Header />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color }) => {
-            let iconName = 'search-web';
-            if(route.name === 'Home') iconName= 'home'
+            let iconName;
+            if(route.name === "Home") iconName= 'home'
             else if(route.name === 'Friends') iconName = 'account-multiple-outline'
-            else if (route.name === 'Groups') iconName = 'account-group'
+            else if(route.name === 'Groups') iconName = 'account-group'
             else if(route.name === 'Profile') iconName = 'account-circle-outline'
             else if(route.name === 'Notifications') iconName = 'bell-outline'
             else if(route.name === 'Menu') iconName = 'menu'
@@ -45,16 +45,16 @@ export default function Index() {
           tabBarActiveTintColor: '#3a86e9',
           tabBarInactiveTintColor: '#9F9F9F',
           tabBarShowIcon: true,
-          tabBarShowLabel: false
+          tabBarShowLabel: false,
+          swipeEnabled: true
         })}>
-          <Tab.Screen name="Home" component={Home}></Tab.Screen>
-          <Tab.Screen name="Friends" component={Friends}></Tab.Screen>
-          <Tab.Screen name="Group" component={Groups}></Tab.Screen>
-          <Tab.Screen name="Profile" component={Profile}></Tab.Screen>
-          <Tab.Screen name="Notifications" component={Notifications}></Tab.Screen> 
-          <Tab.Screen name="Menu" component={Menu}></Tab.Screen> 
+          <Tab.Screen name="Home" component={Home}/>
+          <Tab.Screen name="Friends" component={Friends}/>
+          <Tab.Screen name="Groups" component={Groups}/>
+          <Tab.Screen name="Profile" component={Profile}/>
+          <Tab.Screen name="Notifications" component={Notifications}/> 
+          <Tab.Screen name="Menu" component={Menu}/>
         </Tab.Navigator> 
-    </ScrollView>
     </>
   );
 }

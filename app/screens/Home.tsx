@@ -1,4 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import MainSeparator from "../components/MainSeparator";
+import ToolBar from "../components/ToolBar";
+import Users from "../components/Users";
 
 const styles = StyleSheet.create({
     view: {
@@ -10,7 +13,9 @@ const styles = StyleSheet.create({
 const Home = () => {
     return (
         <View style={styles.view}>
-            <Text>Home Screen</Text>
+            <ToolBar />
+            <MainSeparator />
+            <Users />
         </View>
     )
 }
