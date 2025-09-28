@@ -110,19 +110,11 @@ const Story = () => {
     return(
         <>
             <View style={styles.container}>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{paddingLeft:10, flexDirection: 'row'}} scrollEventThrottle={5}
-                onScroll={Animated.event([
-                    {
-                        nativeEvent: { contentOffset: {x: Animations.scroll_x} }
-                    }
-                ])}>
-                    <Animated.View style={[styles.personalCard, {
+                <Animated.View style={[styles.personalCard, {
                         top: Animations.cardTop,
                         left: Animations.cardLeft,
                         height: Animations.cardHeight,
                         borderRadius: Animations.cardRadius,
-                        borderBottomLeftRadius: Animations.cardLeftRadius,
-                        borderBottomRightRadius: Animations.cardLeftRadius
                         }]}>
                         <Animated.Image style={[styles.personalCardStory, {
                             top: Animations.imageTop,
@@ -148,6 +140,12 @@ const Story = () => {
                             <MaterialCommunityIcons name="plus" size={26} color="#FFFFFF"/>
                         </Animated.View>
                     </Animated.View>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{paddingLeft:10, flexDirection: 'row'}} scrollEventThrottle={5}
+                onScroll={Animated.event([
+                    {
+                        nativeEvent: { contentOffset: {x: Animations.scroll_x} }
+                    }
+                ])}>
                     <View style={styles.fakeCard}/>
                     {fakeStories.map((story, i) => {
                         return(

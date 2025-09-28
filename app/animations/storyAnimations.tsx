@@ -4,7 +4,7 @@ export const scroll_x = new Animated.Value(0);
 
 export const cardTop = scroll_x.interpolate({
     inputRange: [0,100],
-    outputRange: [0, 80],
+    outputRange: [10, 80],
     extrapolate: 'clamp'
 })
 

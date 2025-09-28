@@ -110,9 +110,11 @@ const Post = () => {
                         <View style={styles.fosterCount}>
                             <View style={styles.row}>
                                 <View style={styles.iconCount}>
-                                    <MaterialCommunityIcons name='thumb-up-outline' size={26} color='#FFFFFF'/>
+                                    <MaterialCommunityIcons name='thumb-up-outline' size={16} color='#FFFFFF'/>
                                 </View>
+                                <Text style={styles.textCount}>{user.likes}</Text>
                             </View>
+                            <Text style={styles.textCount}>{user.comments}</Text>
                         </View>
                      </View>
                      <View style={styles.separator}/>
