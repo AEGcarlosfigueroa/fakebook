@@ -89,7 +89,6 @@ const Post = () => {
         <>
         {fakeData.map((user, i) => {
             return(
-                <>
                 <View style={styles.container} key={i.toString()}>
                     <View style={styles.header}>
                         <View style={styles.row}>
@@ -137,9 +136,8 @@ const Post = () => {
                             <Text style={styles.text}>Compartir</Text>
                         </TouchableOpacity>
                      </View>
+                     <MainSeparator/>
                 </View>
-                <MainSeparator/>
-                </>
             )
         })}
         </>

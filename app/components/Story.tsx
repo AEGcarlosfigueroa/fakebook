@@ -1,7 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Animated, Image, ScrollView, StyleSheet, View } from "react-native";
 import styled from "styled-components/native";
+import * as Animations from "../animations/storyAnimations";
 import fakeStories from "../data/fakeStories";
 import Avatar from "./Avatar";
 
@@ -10,7 +11,48 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 215,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF'
+    },
+    fakeCard: {
+        width: 110,
+        height: 200,
+        marginLeft: 20,
+        backgroundColor: '#FFFFFF'
+    },
+    personalCard: {
+        width: 110,
+        height: 200,
+        marginRight: 10,
+        position: 'absolute',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        zIndex: 10,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#DDDDDD'
+    },
+    personalCardStory: {
+        width: '100%',
+        height: 130,
+        borderRadius: 10,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        position: 'absolute',
+        top: 0,
+        left: 0
+    },
+    personalCardIcon: {
+        width: 34,
+        height: 34,
+        borderRadius: 17,
+        backgroundColor: '#3a86e9',
+        borderWidth: 3,
+        borderColor: '#FFFFFF',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 115,
+        left: 40
     },
     userCard: {
         width: 110,
@@ -33,19 +75,6 @@ const styles = StyleSheet.create({
         top: 115,
         left: 40
     },
-    userCardFooter: {
-        position: 'absolute',
-        width: '100%',
-        height: '35%',
-        top: 130,
-        left: 0,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#DDDDDD',
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        backgroundColor: '#FFFFFF'
-    },
     userOnCard: {
         position: 'absolute',
         top: 8,
@@ -63,7 +92,7 @@ const Text = styled.Text`
     font-size: 12px;
     font-weight: bold;
     margin: 0 10px;
-    padding-top: ${(props => props.profile ? '20px' : '45px')};
+    padding-top: ${(props => props.profile ? '155px' : '45px')};
     text-align: center;
     color: ${(props => props.profile ? '#000000' : '#FFFFFF')}
 `
@@ -74,9 +103,6 @@ const UserCardFooter = styled.View`
     height: 35%;
     top: 130px;
     left: 0px;
-    border: ${(props => props.profile ? '1px solid #DDDDDD' : 0)};
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
     background: ${(props => props.profile ? '#FFFFFF' : 'rgba(255,255,255,0)')};
 `
 
@@ -84,16 +110,45 @@ const Story = () => {
     return(
         <>
             <View style={styles.container}>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{paddingLeft:10}}>
-                    <View style={styles.userCard}>
-                        <Image style={styles.userCardStory} source={require('../../assets/images/story.jpg')}/>
-                        <UserCardFooter profile={true}>
-                            <Text profile={true}>Crear una historia</Text>
-                        </UserCardFooter>
-                        <View style={styles.userCardPlus}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{paddingLeft:10, flexDirection: 'row'}} scrollEventThrottle={5}
+                onScroll={Animated.event([
+                    {
+                        nativeEvent: { contentOffset: {x: Animations.scroll_x} }
+                    }
+                ])}>
+                    <Animated.View style={[styles.personalCard, {
+                        top: Animations.cardTop,
+                        left: Animations.cardLeft,
+                        height: Animations.cardHeight,
+                        borderRadius: Animations.cardRadius,
+                        borderBottomLeftRadius: Animations.cardLeftRadius,
+                        borderBottomRightRadius: Animations.cardLeftRadius
+                        }]}>
+                        <Animated.Image style={[styles.personalCardStory, {
+                            top: Animations.imageTop,
+                            left: Animations.imageLeft,
+                            width: Animations.imageWidth,
+                            height: Animations.imageHeight,
+                            marginRight: Animations.imageMargin,
+                            marginTop: Animations.imageMargin,
+                            borderRadius: Animations.imageRadius,
+                            borderBottomLeftRadius: Animations.imageBottomRadius,
+                            borderBottomRightRadius: Animations.imageBottomRadius
+                        }]} source={require('../../assets/images/story.jpg')}/>
+                            <Text as={Animated.Text} profile={true} style={{
+                                opacity: Animations.textOpacity,
+                                scaleX: Animations.textScale,
+                                scaleY: Animations.textScale,
+                            }}>Crear una historia</Text>
+                        <Animated.View style={[styles.personalCardIcon, {
+                            top: Animations.iconTop,
+                            left: Animations.iconLeft,
+                            transform: [{scale: Animations.iconScale}]
+                        }]}>
                             <MaterialCommunityIcons name="plus" size={26} color="#FFFFFF"/>
-                        </View>
-                    </View>
+                        </Animated.View>
+                    </Animated.View>
+                    <View style={styles.fakeCard}/>
                     {fakeStories.map((story, i) => {
                         return(
                             <View style={styles.userCard} key={i.toString()}>
